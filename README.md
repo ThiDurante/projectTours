@@ -18,7 +18,7 @@ In this project i will build a Web App that sells tours to people that want to t
 - Build an API
 - Authetication
 - Authorization
-  -Security
+- Security
 - MongoDB/Mongoose
 - Payments
 

@@ -1,27 +1,34 @@
 import express from 'express';
-import {
-  deleteTour,
-  getAllTours,
-  getTour,
-  newTour,
-  updateTour,
-} from './routes/routes.js';
+import tourRouter from './routes/tourRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 const app = express();
 // setting port
 const PORT = process.env.PORT || 3001;
 // middleware
 app.use(express.json());
-
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 // routes
 
-app.route('/api/v1/tours').get(getAllTours).post(newTour);
-app
-  .route('/api/v1/tours/:id')
-  .get(getTour)
-  .patch(updateTour)
-  .delete(deleteTour);
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
 
+//creating new router
+// const tourRouter = express.Router();
+// const userRouter = express.Router();
+// router for tours
+// app.use('/api/v1/tours', tourRouter);
+// router for users
+// app.use('/api/v1/users', userRouter);
+
+// tourRouter.route('/').get(getAllTours).post(newTour);
+// tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
+
+// userRouter.route('/').get(getAllUsers).post(createUser);
+// userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser);
 // get routes
 
 // app.get('/api/v1/tours', getAllTours);

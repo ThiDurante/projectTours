@@ -4,6 +4,7 @@ import fs from 'fs';
 const tours = JSON.parse(fs.readFileSync('./data/tours.json'));
 
 export const getAllTours = (req, res) => {
+  console.log(req.requestTime);
   res.status(200).json({
     status: 'success',
     results: tours.length,
@@ -88,5 +89,39 @@ export const deleteTour = (req, res) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+};
+
+export const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is in construction',
+  });
+};
+
+export const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is in construction',
+  });
+};
+
+export const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is in construction',
+  });
+};
+
+export const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is in construction',
+  });
+};
+export const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This route is in construction',
   });
 };
