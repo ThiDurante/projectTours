@@ -11,6 +11,17 @@ In this project i will build a Web App that sells tours to people that want to t
 - [@ThiDurante](https://www.github.com/ThiDurante)
 - [Linkedin](https://www.linkedin.com/in/thidurante/)
 
+## Things I Learned
+
+- NodeJS
+- Express
+- Build an API
+- Authetication
+- Authorization
+  -Security
+- MongoDB/Mongoose
+- Payments
+
 ## 🚀 About me
 
 Im a backend web developer wannabe!!

@@ -13,8 +13,6 @@ const PORT = process.env.PORT || 3001;
 // middleware
 app.use(express.json());
 
-// reading json file for now, will use mongoDB later
-
 // routes
 
 app.route('/api/v1/tours').get(getAllTours).post(newTour);
