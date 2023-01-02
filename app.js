@@ -3,8 +3,10 @@ import tourRouter from './routes/tourRoutes.js';
 import userRouter from './routes/userRoutes.js';
 
 const app = express();
+
 // setting port
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
+
 // middleware
 app.use(express.json());
 app.use((req, res, next) => {
@@ -15,6 +17,14 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
+
+export default app;
+
+// open server
+
+// app.listen(PORT, '127.0.0.1', () => {
+//   console.log('Server online');
+// });
 
 //creating new router
 // const tourRouter = express.Router();
@@ -45,9 +55,3 @@ app.use('/api/v1/users', userRouter);
 // deleting data with delete
 
 // app.delete('/api/v1/tours/:id', deleteTour);
-
-// open server
-
-app.listen(PORT, '127.0.0.1', () => {
-  console.log('Server online');
-});
