@@ -28,6 +28,7 @@ export const getAllTours = async (req, res) => {
     const allTours = await Tour.find(); // find return array of documents in collection and convert documents into objects
     res.status(201).json({
       status: 'success',
+      results: allTours.length,
       data: {
         tours: allTours,
       },
