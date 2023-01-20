@@ -4,7 +4,7 @@ const tourSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Tour must have a name'], // validator: first is if it is required or not, second is the error that is going to show us
-    unique: true,
+    unique: true, // no other tour can have the same name
     trim: true,
   },
   duration: {
@@ -26,7 +26,7 @@ const tourSchema = new mongoose.Schema({
   },
   ratingQuantity: {
     type: Number,
-    default: 0, // sets a default if no value is provided
+    default: 0,
   },
   price: {
     type: Number,
@@ -48,12 +48,12 @@ const tourSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Tour must have cover image'],
   },
-  images: [String],
+  images: [String], // array of strings
   createdAt: {
     type: Date,
     default: Date.now(), // date.now gives the timestamp in miliseconds, mongo converts it automatically to normal date
   },
-  startDates: [Date],
+  startDates: [Date], // array of dates
 });
 
 const Tour = mongoose.model('Tour', tourSchema); // can pass a third argument to determine collection name on DB, if no values is passed, mongoose will rename to plural (if there is none created)
