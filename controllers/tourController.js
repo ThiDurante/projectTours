@@ -1,6 +1,40 @@
 // import fs from 'fs';
-
 import Tour from '../models/tourModel.js';
+
+export const getAllTours = async (req, res) => {
+  try {
+    console.log(req.query);
+
+    // filtering
+    // we need to first build the query and then await for it
+
+    // advanced filtering
+    const queryStr = JSON.stringify(req.query);
+    const replacedStr = queryStr.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      (match) => `$${match}`
+    );
+    console.log(JSON.parse(replacedStr));
+    // { duration: { $gte: 5 } } // manually writing the query in mongoDB
+
+    const query = Tour.find(JSON.parse(replacedStr)); // find return array of documents in collection and convert documents into objects
+    const tours = await query;
+    // const tours = await Tour.find().where('duration').equals(5).where('difficulty').equals(5)
+
+    res.status(200).json({
+      status: 'success',
+      results: tours.length,
+      data: {
+        tours: tours,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'fail',
+      message: error,
+    });
+  }
+};
 
 export const createTour = async (req, res) => {
   try {
@@ -17,24 +51,6 @@ export const createTour = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
-      message: error,
-    });
-  }
-};
-
-export const getAllTours = async (req, res) => {
-  try {
-    const allTours = await Tour.find(); // find return array of documents in collection and convert documents into objects
-    res.status(201).json({
-      status: 'success',
-      results: allTours.length,
-      data: {
-        tours: allTours,
-      },
-    });
-  } catch (error) {
-    res.status(404).json({
       status: 'fail',
       message: error,
     });
