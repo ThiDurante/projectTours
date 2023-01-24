@@ -5,9 +5,6 @@ export const getAllTours = async (req, res) => {
   try {
     console.log(req.query);
 
-    // filtering
-    // we need to first build the query and then await for it
-
     // advanced filtering
     const queryStr = JSON.stringify(req.query);
     const replacedStr = queryStr.replace(
@@ -17,7 +14,26 @@ export const getAllTours = async (req, res) => {
     console.log(JSON.parse(replacedStr));
     // { duration: { $gte: 5 } } // manually writing the query in mongoDB
 
-    const query = Tour.find(JSON.parse(replacedStr)); // find return array of documents in collection and convert documents into objects
+    // build the query first before awaiting for it
+    let query = Tour.find(JSON.parse(replacedStr)); // find return array of documents in collection and convert documents into objects
+
+    // sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('name');
+    }
+
+    // limiting fields
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields); //expects a string with field names
+    } else {
+      query = query.select('-__v');
+    }
+
+    // after all methods are applied we fire the query to the DB
     const tours = await query;
     // const tours = await Tour.find().where('duration').equals(5).where('difficulty').equals(5)
 
