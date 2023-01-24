@@ -15,11 +15,12 @@ In this project i will build a Web App that sells tours to people that want to t
 
 - NodeJS
 - Express
-- Build an API
+- API Routes, Controllers, Server
+- Handling users
 - Authetication
 - Authorization
 - Security
-- MongoDB/Mongoose
+- MongoDB/Mongoose, Schema, Models
 - Payments
 
 ## 🚀 About me
