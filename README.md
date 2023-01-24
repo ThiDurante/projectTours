@@ -1,4 +1,4 @@
-# projectTours
+<h1 align=center>projectTours</h1>
 
 In this project i will build a Web App that sells tours to people that want to travel around the world!
 
