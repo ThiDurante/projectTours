@@ -33,6 +33,17 @@ export const getAllTours = async (req, res) => {
       query = query.select('-__v');
     }
 
+    // pagination
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 100;
+    const skip = (page - 1) * limit;
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numberOfTours = await Tour.countDocuments();
+      if (skip > numberOfTours) throw new Error(`Page doesn't exist`);
+    }
+
     // after all methods are applied we fire the query to the DB
     const tours = await query;
     // const tours = await Tour.find().where('duration').equals(5).where('difficulty').equals(5)
