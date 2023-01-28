@@ -1,9 +1,16 @@
 // import fs from 'fs';
 import Tour from '../models/tourModel.js';
 
+export const aliasTop5Cheap = async (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingAverage,price';
+  req.query.fiels = 'name,price,ratingAverage,difficulty,summary';
+  next();
+};
+
 export const getAllTours = async (req, res) => {
   try {
-    console.log(req.query);
+    // console.log(req.query);s
 
     // advanced filtering
     const queryStr = JSON.stringify(req.query);
@@ -11,7 +18,7 @@ export const getAllTours = async (req, res) => {
       /\b(gte|gt|lte|lt)\b/g,
       (match) => `$${match}`
     );
-    console.log(JSON.parse(replacedStr));
+    // console.log(JSON.parse(replacedStr));
     // { duration: { $gte: 5 } } // manually writing the query in mongoDB
 
     // build the query first before awaiting for it
